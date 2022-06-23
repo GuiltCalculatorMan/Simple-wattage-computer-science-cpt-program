@@ -1,0 +1,62 @@
+import java.util.*;
+public class wattageCalculator
+{
+    private int numberOfStudents;
+    private double wattage;
+    private int fixtures;
+    private double hoursActive;
+    private int workDaysPerMonth;
+    private int workMonthsPerYear;
+    private int treesToFix;
+    private String name;
+
+
+    public wattageCalculator(String theName, int studentsNumber, double wh, int units, double hrsActive, int daysInMonth, int workMonthsYearly)
+    {
+        schoolInput(theName, studentsNumber, wh, units, hrsActive, daysInMonth, workMonthsYearly);
+
+        schoolKw();
+        
+        schoolFootPrint();
+
+        treesToNullify();
+
+        //toString();
+    }
+    private void schoolInput(String theName, int studentsNumber, double wh, int units, double hrsActive, int daysInMonth, int workMonthsYearly){
+        name = theName;
+        numberOfStudents = studentsNumber;
+        wattage = wh;
+        fixtures = units;
+        hoursActive = hrsActive;
+        workDaysPerMonth = daysInMonth;
+        workMonthsPerYear = workMonthsYearly;
+    }
+    private void schoolKw(){
+        totalKW = ((fixtures*wattage)/1000);
+        KWHPerDay = (totalKW*hoursActive);
+        KWHPerMonth = (KWHPerDay*workDaysPerMonth);
+        KWHPerYear = (KWHPerMonth*workMonthsPerYear);
+    }
+    private void schoolFootPrint(){
+        kgCo2PerWorkYear = Math.round(KWHPerYear*0.180);
+        kgCo2PerStudentYearly = Math.round(kgCo2PerWorkYear/numberOfStudents);
+    }
+    private void treesToNullify(){
+        treesToFix = (int)Math.round(kgCo2PerWorkYear/12);
+    }
+
+    private double totalKW = ((fixtures*wattage)/1000);
+    private double KWHPerDay = (totalKW*hoursActive);
+
+    private double KWHPerMonth = (KWHPerDay*workDaysPerMonth);
+    private double KWHPerYear = (KWHPerMonth*workMonthsPerYear);
+
+    private double kgCo2PerWorkYear = (KWHPerYear*0.180);
+    private double kgCo2PerStudentYearly = (kgCo2PerWorkYear/numberOfStudents);
+
+    public String toString()
+    {
+        return "\nThe total KWH of all " + name + "'s" + " fixtures is " + totalKW + "\nThe total KWH per day of " + name + "'s " + "fixtures is " + KWHPerDay + "\nThe total KWH per month is " + KWHPerMonth + "\nThe total KWH yearly of all " + name + "'s " + "fixtures is " + KWHPerYear + "\nThe amount of CO2 emissions this facility is responsible for yearly in kgs is " + (int)kgCo2PerWorkYear + "\nThe amount of CO2 emissions its students are responsible for yearly in kgs is " + (int)kgCo2PerStudentYearly + "\n \nThe amount of trees needed to nullify " + name + "'s " + "footprint are: " + treesToFix;
+    }
+}

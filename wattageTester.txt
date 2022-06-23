@@ -1,0 +1,14 @@
+public class wattageTester{
+    public static void main(String[] args){
+        
+        Scanner in = new Scanner(System.in);
+        //(number of students, wattage, fixtures, hours on, work days monthly, work months per year)
+
+        wattageCalculator Loyola = new wattageCalculator("Loyola", 1200, 30, 1200, 10, 22, 10);
+        System.out.println(Loyola);
+        wattageCalculator Gonzaga = new wattageCalculator("Gonzaga", 1500, 30, 1600, 10, 22, 10);
+        System.out.println(Gonzaga);
+        wattageCalculator Iona = new wattageCalculator("Iona", 1100, 30, 1000, 10, 22, 10);
+        System.out.println(Iona);
+    }
+}
